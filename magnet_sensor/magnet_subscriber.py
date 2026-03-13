@@ -13,7 +13,8 @@ class MagnetSubscriber(Node):
             10)
 
     def listener_callback(self, msg):
-        self.get_logger().info('Magnet present: %s' % msg.data)
+        status = "DETECTED" if msg.data else "not detected"
+        self.get_logger().info(f'Magnet: {status}')
 
 
 def main(args=None):
