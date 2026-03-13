@@ -1,14 +1,14 @@
 //For more Projects: www.arduinocircuit.com
 int led = 13 ; // LED on arduino
-int digitalPin = 3; // linear Hall magnetic sensor digital interface
-int analogPin = A0; // linear Hall magnetic sensor analog interface
+int digitalPin = 5; // linear Hall magnetic sensor digital interface
+int analogPin = A4; // linear Hall magnetic sensor analog interface
 int digitalVal ; // digital readings
 int analogVal; // analog readings
 void setup ()
 {
   pinMode (led, OUTPUT);
   pinMode (digitalPin, INPUT);
-  //pinMode(analogPin, INPUT);
+  pinMode(analogPin, INPUT);
   Serial.begin(9600);
 }
 void loop ()
@@ -28,7 +28,7 @@ void loop ()
   analogVal = analogRead(analogPin);
   Serial.print("D:");
   Serial.print(digitalVal);
-  Serial.print(",A:");
+  Serial.print(" A:");
   Serial.println(analogVal);
   delay(100);
 }
