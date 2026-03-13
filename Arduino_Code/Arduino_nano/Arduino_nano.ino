@@ -27,7 +27,7 @@ void loop ()
   // Read the analog interface
   // analogVal = analogRead(analogPin);
   // Serial.print("D:");
-  Serial.print(digitalVal);
+  Serial.println(digitalVal);
   // Serial.print(",A:");
   // Serial.println(analogVal);
   delay(100);

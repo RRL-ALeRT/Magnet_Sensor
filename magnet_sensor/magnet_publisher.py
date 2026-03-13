@@ -12,7 +12,7 @@ class MagnetPublisher(Node):
         self.ser = serial.Serial('/dev/ttyUSB0', baudrate=9600, timeout=1)
         print("Serial name:", self.ser.name)
 
-        self.timer = self.create_timer(0.5, self.poll_serial)
+        self.timer = self.create_timer(0.5, self.poll_serial) # change 0.5 to 0.1s
 	
 
     def poll_serial(self):
@@ -23,7 +23,8 @@ class MagnetPublisher(Node):
         print("Data:", data)
 
         msg = Bool()
-        msg.data = "1" in data
+        msg.data = "1" in data # fix the noise
+        # case has to be printed for ky-024s
 
         self.publisher.publish(msg)
         print("Published msg:", msg)
