@@ -20,11 +20,11 @@ class MagnetPublisher(Node):
             return
 
         try:
-            digitalVal = int(line.split())
+            digital_val = int(line.split()[0])
         except (ValueError, IndexError):
             return
 
-        magnet_detected = digitalVal
+        magnet_detected = (digital_val != 0)
 
         print(f"Magnet detected: {magnet_detected}")
 
