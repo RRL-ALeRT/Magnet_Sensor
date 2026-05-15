@@ -3,9 +3,6 @@ from rclpy.node import Node
 from std_msgs.msg import Bool
 import serial
 
-THRESHOLD_CENTER = 518
-THRESHOLD_OFFSET = 20
-
 class MagnetPublisher(Node):
     def __init__(self):
         super().__init__('magnet_publisher')
@@ -23,16 +20,13 @@ class MagnetPublisher(Node):
             return
 
         try:
-            # Arduino sends "D:x A:y" format
-            parts = line.split()
-            analog_val = int(parts[1].split(':')[1])
+            digitalVal = int(line.split())
         except (ValueError, IndexError):
             return
 
-        magnet_detected = analog_val < (THRESHOLD_CENTER - THRESHOLD_OFFSET) or \
-                          analog_val > (THRESHOLD_CENTER + THRESHOLD_OFFSET)
+        magnet_detected = digitalVal
 
-        print(f"Analog: {analog_val} | Magnet detected: {magnet_detected}")
+        print(f"Magnet detected: {magnet_detected}")
 
         msg = Bool()
         msg.data = magnet_detected
