@@ -1,34 +1,18 @@
-int led = 13; // define the LED pin
-int digitalPin = 2; // KY-025 digital interface
-//int analogPin = A0; // KY-025 analog interface
-int digitalVal; // digital readings
-// int analogVal; //analog readings
+const int LED_PIN  = 13;
+const int REED_PIN = 2;
 
-void setup()
-{
-  pinMode(led, OUTPUT);
-  pinMode(digitalPin, INPUT);
-  //pinMode(analogPin, OUTPUT);
+int digitalVal;
+
+void setup() {
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(REED_PIN, INPUT_PULLUP);
   Serial.begin(9600);
 }
 
-void loop()
-{
-  // Read the digital interface
-  digitalVal = digitalRead(digitalPin); 
-  if(digitalVal == HIGH) // if magnetic field is detected
-  {
-    digitalWrite(led, HIGH); // turn ON Arduino's LED
-  }
-  else
-  {
-    digitalWrite(led, LOW); // turn OFF Arduino's LED
-  }
+void loop() {
+  digitalVal = !digitalRead(REED_PIN);  // invert: LOW=closed=1, HIGH=open=0
 
-  // Read the analog interface
-  //analogVal = analogRead(analogPin); 
-  // Serial.println(analogVal); // print analog value to serial
-  Serial.println(digitalVal);
-
+  digitalWrite(LED_PIN, digitalVal);
+  Serial.println(digitalVal);  // prints 0 or 1
   delay(100);
 }
